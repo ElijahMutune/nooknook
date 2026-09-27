@@ -10,6 +10,7 @@ function Login() {
     });
 
     const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (event) => {
         setForm({
@@ -18,7 +19,7 @@ function Login() {
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         setError("");
@@ -28,15 +29,59 @@ function Login() {
             return;
         }
 
-        /*
-         * TEMPORARY LOGIN
-         *
-         * Backend authentication will be connected later.
-         */
+        try {
+            setLoading(true);
 
-        console.log("Login:", form);
+            const response = await fetch(
+                "http://localhost:5000/api/auth/login",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email: form.email,
+                        password: form.password
+                    })
+                }
+            );
 
-        navigate("/");
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message || "Login failed."
+                );
+            }
+
+            // Save JWT token
+            localStorage.setItem("token", data.token);
+
+            // Save logged-in user information
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.user)
+            );
+
+            // Send admin to admin dashboard
+            if (data.user.role === "admin") {
+                navigate("/admin");
+            } else {
+                // Normal users go to homepage
+                navigate("/");
+            }
+
+        } catch (err) {
+            console.error("Login error:", err);
+
+            setError(
+                err.message ||
+                "Unable to login. Please try again."
+            );
+
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -72,6 +117,7 @@ function Login() {
                             value={form.email}
                             onChange={handleChange}
                             placeholder="Enter your email"
+                            disabled={loading}
                         />
 
                     </div>
@@ -86,6 +132,7 @@ function Login() {
                             value={form.password}
                             onChange={handleChange}
                             placeholder="Enter your password"
+                            disabled={loading}
                         />
 
                     </div>
@@ -93,8 +140,9 @@ function Login() {
                     <button
                         type="submit"
                         className="auth-submit"
+                        disabled={loading}
                     >
-                        Login
+                        {loading ? "Logging in..." : "Login"}
                     </button>
 
                 </form>

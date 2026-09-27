@@ -1,0 +1,586 @@
+.place-nav-wrapper {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+}
+
+.place-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+
+    width: 100%;
+
+    padding: 10px 15px;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    box-sizing: border-box;
+
+    /*
+       IMPORTANT:
+       No horizontal scrolling.
+    */
+    overflow: visible;
+}
+
+.place-nav-item {
+    position: relative;
+    flex: 0 1 auto;
+}
+
+/* =========================================
+   PLACE BUTTON
+========================================= */
+
+.place-button {
+    border: none;
+
+    background: transparent;
+
+    padding: 9px 14px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    white-space: nowrap;
+
+    transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+}
+
+.place-button:hover {
+    background: #f1f5f9;
+
+    transform: translateY(-1px);
+}
+
+.place-arrow {
+    margin-left: 6px;
+
+    font-size: 11px;
+}
+
+/* =========================================
+   DROPDOWN
+========================================= */
+
+.house-dropdown {
+    position: absolute;
+
+    top: 100%;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    min-width: 200px;
+
+    padding: 8px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 10px;
+
+    box-shadow:
+            0 12px 30px rgba(0, 0, 0, 0.15);
+
+    z-index: 9999;
+
+    animation: dropdownAppear 0.18s ease;
+}
+
+@keyframes dropdownAppear {
+    from {
+        opacity: 0;
+
+        transform:
+                translateX(-50%)
+                translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+                translateX(-50%)
+                translateY(0);
+    }
+}
+
+/* =========================================
+   CATEGORY
+========================================= */
+
+.house-dropdown-item {
+    display: block;
+
+    width: 100%;
+
+    padding: 11px 13px;
+
+    border: none;
+
+    background: transparent;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    border-radius: 7px;
+
+    transition:
+            background 0.2s ease,
+            padding-left 0.2s ease;
+}
+
+.house-dropdown-item:hover {
+    background: #f1f5f9;
+
+    padding-left: 18px;
+}
+
+/* =========================================
+   LOADING
+========================================= */
+
+.category-loading {
+    padding: 11px 13px;
+
+    font-size: 13px;
+
+    color: #777;
+}
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.no-categories {
+    padding: 11px 13px;
+
+    font-size: 13px;
+
+    color: #777;
+
+    white-space: nowrap;
+}
+
+/* =========================================
+   MEDIUM SCREEN
+========================================= */
+
+@media (max-width: 900px) {
+    .place-nav {
+        gap: 2px;
+
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .place-button {
+        padding: 8px 10px;
+
+        font-size: 14px;
+    }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+    .place-nav {
+        justify-content: flex-start;
+
+        flex-wrap: wrap;
+
+        gap: 3px;
+    }
+
+    .place-button {
+        padding: 8px 9px;
+
+        font-size: 13px;
+    }
+
+    .house-dropdown {
+        left: 0;
+
+        transform: none;
+    }
+
+    @keyframes dropdownAppear {
+        from {
+            opacity: 0;
+
+            transform: translateY(-8px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+    }
+}
+
+/* =========================================
+   PLACE NAVIGATION WRAPPER
+========================================= */
+
+.place-nav-wrapper {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+}
+
+
+/* =========================================
+   PLACE NAVIGATION BAR
+========================================= */
+
+.place-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    gap: 5px;
+    padding: 10px 15px;
+
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+
+    box-sizing: border-box;
+
+    /*
+      Important:
+      No horizontal scrollbar.
+    */
+    overflow: visible;
+}
+
+
+/* =========================================
+   INDIVIDUAL PLACE
+========================================= */
+
+.place-nav-item {
+    position: relative;
+    flex: 0 1 auto;
+}
+
+
+/* =========================================
+   PLACE BUTTON
+========================================= */
+
+.place-button {
+    position: relative;
+
+    border: none;
+    background: transparent;
+
+    padding: 9px 14px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    color: #333;
+
+    cursor: pointer;
+
+    border-radius: 8px;
+
+    white-space: nowrap;
+
+    transition:
+            background 0.25s ease,
+            color 0.25s ease,
+            transform 0.25s ease;
+}
+
+.place-button:hover {
+    background: #f1f1f1;
+    color: #000;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   PLACE BUTTON UNDERLINE
+========================================= */
+
+.place-button::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 4px;
+
+    width: 0;
+    height: 2px;
+
+    background: #222;
+
+    transform: translateX(-50%);
+
+    transition: width 0.3s ease;
+}
+
+.place-button:hover::after {
+    width: 55%;
+}
+
+
+/* =========================================
+   ARROW
+========================================= */
+
+.place-arrow {
+    margin-left: 6px;
+
+    font-size: 11px;
+
+    transition: transform 0.25s ease;
+}
+
+
+/* =========================================
+   HOUSE TYPE DROPDOWN
+========================================= */
+
+.house-dropdown {
+    position: absolute;
+
+    /*
+      Directly below the place button.
+    */
+    top: 100%;
+    left: 50%;
+
+    min-width: 220px;
+
+    padding: 8px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 0 0 10px 10px;
+
+    box-shadow:
+            0 15px 35px rgba(0, 0, 0, 0.25);
+
+    /*
+      Animation.
+    */
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+            translateX(-50%)
+            translateY(-10px);
+
+    transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0.25s ease;
+
+    z-index: 999999;
+}
+
+
+/*
+   Current React version displays the
+   dropdown conditionally, so it is already
+   visible when rendered.
+*/
+.house-dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    animation: dropdownAppear 0.25s ease;
+}
+
+
+/* =========================================
+   DROPDOWN ANIMATION
+========================================= */
+
+@keyframes dropdownAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+                translateX(-50%)
+                translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+                translateX(-50%)
+                translateY(0);
+    }
+}
+
+
+/* =========================================
+   DROPDOWN BUTTONS
+========================================= */
+
+.house-dropdown button {
+    display: block;
+
+    width: 100%;
+
+    padding: 12px 16px;
+
+    border: none;
+
+    background: transparent;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    color: #333;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            padding-left 0.2s ease,
+            transform 0.2s ease;
+}
+
+.house-dropdown button:hover {
+    background: #f2f2f2;
+
+    padding-left: 22px;
+
+    transform: translateX(2px);
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+.category-loading {
+    padding: 12px 16px;
+
+    font-size: 13px;
+
+    color: #777;
+}
+
+
+/* =========================================
+   NO CATEGORIES
+========================================= */
+
+.no-categories {
+    padding: 12px 16px;
+
+    font-size: 13px;
+
+    color: #777;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .place-nav {
+        gap: 2px;
+
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .place-button {
+        padding: 8px 10px;
+
+        font-size: 14px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .place-nav {
+        justify-content: flex-start;
+
+        flex-wrap: wrap;
+
+        gap: 3px;
+    }
+
+    .place-button {
+        padding: 8px 9px;
+
+        font-size: 13px;
+    }
+
+    .house-dropdown {
+        left: 0;
+
+        transform: translateY(0);
+
+        min-width: 190px;
+    }
+
+    @keyframes dropdownAppear {
+
+        from {
+            opacity: 0;
+
+            transform:
+                    translateY(-8px);
+        }
+
+        to {
+            opacity: 1;
+
+            transform:
+                    translateY(0);
+        }
+    }
+}

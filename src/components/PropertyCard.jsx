@@ -1,11 +1,37 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./PropertyCard.css";
 
 function PropertyCard({ property }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const images = property.images || [];
+    const images = (property.images || [])
+        .map((image) => {
+            let imageUrl = "";
+
+            if (typeof image === "string") {
+                imageUrl = image;
+            } else {
+                imageUrl =
+                    image.image_url ||
+                    image.url ||
+                    image.imageUrl ||
+                    image.path ||
+                    image.filename ||
+                    "";
+            }
+
+            // Convert backend relative URL to full URL
+            if (imageUrl.startsWith("/")) {
+                return `http://localhost:5000${imageUrl}`;
+            }
+
+            return imageUrl;
+        })
+        .filter(Boolean);
+    console.log("PROPERTY:", property);
+    console.log("IMAGES:", images);
 
   /* =========================================
      NEXT IMAGE
@@ -91,57 +117,64 @@ function PropertyCard({ property }) {
       <div className="property-image">
 
         <img
-          src={images[currentImage]}
-          alt={property.name}
-          className="property-slider-image"
+            src={images[currentImage]}
+            alt={property.name}
+            className="property-slider-image"
+            onLoad={() => {
+              console.log("IMAGE LOADED:", images[currentImage]);
+            }}
+            onError={(e) => {
+              console.error("IMAGE FAILED:", images[currentImage]);
+              console.error("Full image element:", e.currentTarget);
+            }}
         />
 
 
         {/* Previous button */}
 
         {images.length > 1 && (
-          <button
-            className="slider-button slider-prev"
-            onClick={previousImage}
-            aria-label="Previous image"
-          >
-            ‹
-          </button>
+            <button
+                className="slider-button slider-prev"
+                onClick={previousImage}
+                aria-label="Previous image"
+            >
+              ‹
+            </button>
         )}
 
 
         {/* Next button */}
 
         {images.length > 1 && (
-          <button
-            className="slider-button slider-next"
-            onClick={nextImage}
-            aria-label="Next image"
-          >
-            ›
-          </button>
+            <button
+                className="slider-button slider-next"
+                onClick={nextImage}
+                aria-label="Next image"
+            >
+              ›
+            </button>
         )}
 
 
         {/* Image dots */}
 
         {images.length > 1 && (
-          <div className="slider-dots">
+            <div className="slider-dots">
 
-            {images.map((_, index) => (
-              <button
-                key={index}
-                className={
-                  index === currentImage
-                    ? "slider-dot active"
-                    : "slider-dot"
-                }
-                onClick={() => setCurrentImage(index)}
-                aria-label={`View image ${index + 1}`}
-              />
-            ))}
+              {images.map((_, index) => (
+                  <button
+                      key={index}
+                      className={
+                        index === currentImage
+                            ? "slider-dot active"
+                            : "slider-dot"
+                      }
+                      onClick={() => setCurrentImage(index)}
+                      aria-label={`View image ${index + 1}`}
+                  />
+              ))}
 
-          </div>
+            </div>
         )}
 
       </div>

@@ -159,15 +159,6 @@ body {
    OLD PLACE / CATEGORY BUTTONS
 ========================================= */
 
-.place-nav,
-.category-nav {
-  display: flex;
-
-  gap: 10px;
-
-  flex-wrap: wrap;
-}
-
 .place-nav button,
 .category-nav button {
   padding: 11px 20px;
@@ -186,30 +177,6 @@ body {
   background: #222;
   color: white;
 }
-
-
-/* =========================================
-   SECOND NAVIGATION
-========================================= */
-
-.places-wrapper {
-  position: relative;
-
-  width: 100%;
-  height: 55px;
-
-  background: white;
-
-  border-bottom: 1px solid #e5e5e5;
-
-  /*
-    VERY HIGH LAYER
-    This keeps the second navigation
-    above the hero section.
-  */
-  z-index: 9999;
-}
-
 
 /* =========================================
    PLACES NAVIGATION BAR
@@ -236,25 +203,6 @@ body {
     No horizontal scrollbar.
   */
   overflow: visible;
-}
-
-
-/* =========================================
-   INDIVIDUAL PLACE
-========================================= */
-
-.place-item {
-  position: relative;
-
-  height: 55px;
-
-  display: flex;
-
-  align-items: center;
-
-  flex-shrink: 0;
-
-  z-index: 10000;
 }
 
 
@@ -2306,4 +2254,28 @@ body {
      font-size: 26px;
    }
 
+ }
+
+
+ /* =========================================
+   PROPERTY DETAILS LAYOUT FIX
+========================================= */
+
+ .property-details-container {
+   display: block !important;
+   width: 100% !important;
+   max-width: 1400px !important;
+   margin: 0 auto !important;
+   padding: 0 !important;
+   background: transparent !important;
+   border-radius: 0 !important;
+ }
+
+ .property-details-card {
+   display: grid !important;
+   grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr) !important;
+   width: 100% !important;
+   max-width: 100% !important;
  }
