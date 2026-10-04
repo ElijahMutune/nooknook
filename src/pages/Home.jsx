@@ -21,7 +21,7 @@ function Home() {
         setLoading(true);
         setError("");
 
-        const SERVER_URL = `${process.env.REACT_APP_API_URL}/properties`;
+        let url = `${process.env.REACT_APP_API_URL}/properties`;
 
         const params = new URLSearchParams();
 
