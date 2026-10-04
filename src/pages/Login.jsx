@@ -33,7 +33,8 @@ function Login() {
             setLoading(true);
 
             const response = await fetch(
-                "http://localhost:5000/api/auth/login",
+                `${process.env.REACT_APP_API_URL}/auth/login`,
+
                 {
                     method: "POST",
                     headers: {

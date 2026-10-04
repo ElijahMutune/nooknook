@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./PropertyDetails.css";
 
-const API_URL = "http://localhost:5000/api";
-const SERVER_URL = "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL;
+const SERVER_URL = process.env.REACT_APP_API_URL.replace("/api", "");
 
 function PropertyDetails() {
   const { id } = useParams();

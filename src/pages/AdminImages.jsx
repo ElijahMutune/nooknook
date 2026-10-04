@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./AdminImages.css";
 
-const API_URL = "http://localhost:5000/api";
-const SERVER_URL = "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL;
+const SERVER_URL = process.env.REACT_APP_API_URL.replace("/api", "");
 
 function AdminImages() {
     const [properties, setProperties] = useState([]);

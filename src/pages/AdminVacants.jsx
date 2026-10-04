@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AdminVacants.css";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function AdminVacants() {
     const [vacants, setVacants] = useState([]);
