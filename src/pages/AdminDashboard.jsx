@@ -177,15 +177,21 @@ const AdminDashboard = () => {
                                 <AdminImages />
                             ) :
                                 activeMenu === "Users" ? (
-                                    <AdminUsers />
-                                ) :(
+                                    <div style={{
+                                        padding: "40px",
+                                        fontSize: "30px",
+                                        fontWeight: "bold"
+                                    }}>
+                                        USERS BUTTON IS WORKING
+                                    </div>
+                                ) : (
 
-                        <>
+                                    <>
 
-                            {/* WELCOME */}
-                            <div className="admin-welcome">
+                                        {/* WELCOME */}
+                                        <div className="admin-welcome">
 
-                                <div>
+                                        <div>
 
                                     <span className="welcome-label">
                                         NOOKNOOK CONTROL CENTER
