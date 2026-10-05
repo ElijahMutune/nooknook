@@ -5,7 +5,7 @@ import AdminCategories from "./AdminCategories";
 import AdminPlaceCategories from "./AdminPlaceCategories";
 import AdminVacants from "./AdminVacants";
 import AdminImages from "./AdminImages";
-
+import AdminUsers from "./AdminUsers";
 
 const AdminDashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -175,7 +175,10 @@ const AdminDashboard = () => {
                         ) :
                             activeMenu === "Images" ? (
                                 <AdminImages />
-                            ) :(
+                            ) :
+                                activeMenu === "Users" ? (
+                                    <AdminUsers />
+                                ) :(
 
                         <>
 
