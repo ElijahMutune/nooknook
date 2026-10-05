@@ -13,6 +13,8 @@ function Register() {
     });
 
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (event) => {
         setForm({
@@ -21,10 +23,11 @@ function Register() {
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         setError("");
+        setSuccess("");
 
         if (
             !form.name ||
@@ -47,16 +50,52 @@ function Register() {
             return;
         }
 
-        /*
-         * TEMPORARY
-         *
-         * Later this will send the information
-         * to the backend API.
-         */
+        try {
+            setLoading(true);
 
-        console.log("Registration:", form);
+            const response = await fetch(
+                `${process.env.REACT_APP_API_URL}/auth/register`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: form.name,
+                        email: form.email,
+                        phone: form.phone,
+                        password: form.password
+                    })
+                }
+            );
 
-        navigate("/login");
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message || "Registration failed."
+                );
+            }
+
+            setSuccess(
+                data.message || "Account created successfully."
+            );
+
+            // Give the user a moment to see the success message
+            setTimeout(() => {
+                navigate("/login");
+            }, 1000);
+
+        } catch (err) {
+            console.error("Registration error:", err);
+
+            setError(
+                err.message ||
+                "Unable to create account. Please try again."
+            );
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -78,6 +117,12 @@ function Register() {
                     </div>
                 )}
 
+                {success && (
+                    <div className="auth-success">
+                        {success}
+                    </div>
+                )}
+
                 <form onSubmit={handleSubmit}>
 
                     <div className="form-group">
@@ -89,6 +134,7 @@ function Register() {
                             value={form.name}
                             onChange={handleChange}
                             placeholder="Enter your full name"
+                            disabled={loading}
                         />
                     </div>
 
@@ -101,6 +147,7 @@ function Register() {
                             value={form.email}
                             onChange={handleChange}
                             placeholder="Enter your email"
+                            disabled={loading}
                         />
                     </div>
 
@@ -113,6 +160,7 @@ function Register() {
                             value={form.phone}
                             onChange={handleChange}
                             placeholder="e.g. 0712345678"
+                            disabled={loading}
                         />
                     </div>
 
@@ -125,6 +173,7 @@ function Register() {
                             value={form.password}
                             onChange={handleChange}
                             placeholder="Create a password"
+                            disabled={loading}
                         />
                     </div>
 
@@ -137,14 +186,18 @@ function Register() {
                             value={form.confirmPassword}
                             onChange={handleChange}
                             placeholder="Confirm your password"
+                            disabled={loading}
                         />
                     </div>
 
                     <button
                         type="submit"
                         className="auth-submit"
+                        disabled={loading}
                     >
-                        Create Account
+                        {loading
+                            ? "Creating Account..."
+                            : "Create Account"}
                     </button>
 
                 </form>
