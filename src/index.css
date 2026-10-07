@@ -976,127 +976,127 @@ body {
  }
 
 
- /* =========================================
-    PROPERTY CARD HOVER
- ========================================= */
+ /*!* =========================================*/
+ /*   PROPERTY CARD HOVER*/
+ /*========================================= *!*/
 
- .property-card {
-   transition:
-           transform 0.25s ease,
-           box-shadow 0.25s ease;
- }
-
-
- .property-card:hover {
-   transform: translateY(-5px);
-
-   box-shadow:
-           0 12px 30px rgba(0, 0, 0, 0.12);
- }
+ /*.property-card {*/
+ /*  transition:*/
+ /*          transform 0.25s ease,*/
+ /*          box-shadow 0.25s ease;*/
+ /*}*/
 
 
- /* =========================================
-    PRICE
- ========================================= */
+ /*.property-card:hover {*/
+ /*  transform: translateY(-5px);*/
 
- .property-bottom strong {
-   font-size: 17px;
- }
-
-
- /* =========================================
-    MOBILE
- ========================================= */
-
- @media (max-width: 700px) {
-
-   .property-image {
-     height: 230px;
-   }
-
-   /*
-     Always show arrows on mobile because
-     there is no mouse hover.
-   */
-
-   .slider-button {
-     opacity: 1;
-
-     width: 34px;
-
-     height: 34px;
-
-     font-size: 24px;
-   }
-
- }
-
-        /* ================================
-           PROPERTIES SECTION
-        ================================ */
-
-    .properties-section {
-        width: 88%;
-        max-width: 1300px;
-        margin: 50px auto;
-    }
-
- .section-heading {
-     margin-bottom: 25px;
-     text-align: left;
- }
-
- .section-heading h2 {
-     font-size: 30px;
-     margin-bottom: 8px;
- }
-
- .section-heading p {
-     color: #666;
-     font-size: 15px;
- }
+ /*  box-shadow:*/
+ /*          0 12px 30px rgba(0, 0, 0, 0.12);*/
+ /*}*/
 
 
- /* ================================
-    PROPERTY GRID
- ================================ */
+ /*!* =========================================*/
+ /*   PRICE*/
+ /*========================================= *!*/
 
- .property-grid {
-     display: grid;
-     grid-template-columns: repeat(3, 1fr);
-     gap: 25px;
-     text-align: left;
- }
+ /*.property-bottom strong {*/
+ /*  font-size: 17px;*/
+ /*}*/
 
 
- /* ================================
-    PROPERTY CARD
- ================================ */
+ /*!* =========================================*/
+ /*   MOBILE*/
+ /*========================================= *!*/
 
- .property-card {
-     background: white;
-     border-radius: 12px;
-     overflow: hidden;
-     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
- }
+ /*@media (max-width: 700px) {*/
 
- .property-content {
-     padding: 18px;
- }
+ /*  .property-image {*/
+ /*    height: 230px;*/
+ /*  }*/
 
- .property-category {
-     display: inline-block;
-     padding: 5px 10px;
-     background: #f1f1f1;
-     border-radius: 20px;
-     font-size: 12px;
-     margin-bottom: 10px;
- }
+ /*  !**/
+ /*    Always show arrows on mobile because*/
+ /*    there is no mouse hover.*/
+ /*  *!*/
 
- .property-content h3 {
-     font-size: 20px;
-     margin-bottom: 8px;
- }
+ /*  .slider-button {*/
+ /*    opacity: 1;*/
+
+ /*    width: 34px;*/
+
+ /*    height: 34px;*/
+
+ /*    font-size: 24px;*/
+ /*  }*/
+
+ /*}*/
+
+ /*       !* ================================*/
+ /*          PROPERTIES SECTION*/
+ /*       ================================ *!*/
+
+ /*   .properties-section {*/
+ /*       width: 88%;*/
+ /*       max-width: 1300px;*/
+ /*       margin: 50px auto;*/
+ /*   }*/
+
+ /*.section-heading {*/
+ /*    margin-bottom: 25px;*/
+ /*    text-align: left;*/
+ /*}*/
+
+ /*.section-heading h2 {*/
+ /*    font-size: 30px;*/
+ /*    margin-bottom: 8px;*/
+ /*}*/
+
+ /*.section-heading p {*/
+ /*    color: #666;*/
+ /*    font-size: 15px;*/
+ /*}*/
+
+
+ /*!* ================================*/
+ /*   PROPERTY GRID*/
+ /*================================ *!*/
+
+ /*.property-grid {*/
+ /*    display: grid;*/
+ /*    grid-template-columns: repeat(3, 1fr);*/
+ /*    gap: 25px;*/
+ /*    text-align: left;*/
+ /*}*/
+
+
+ /*!* ================================*/
+ /*   PROPERTY CARD*/
+ /*================================ *!*/
+
+ /*.property-card {*/
+ /*    background: white;*/
+ /*    border-radius: 12px;*/
+ /*    overflow: hidden;*/
+ /*    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);*/
+ /*}*/
+
+ /*.property-content {*/
+ /*    padding: 18px;*/
+ /*}*/
+
+ /*.property-category {*/
+ /*    display: inline-block;*/
+ /*    padding: 5px 10px;*/
+ /*    background: #f1f1f1;*/
+ /*    border-radius: 20px;*/
+ /*    font-size: 12px;*/
+ /*    margin-bottom: 10px;*/
+ /*}*/
+
+ /*.property-content h3 {*/
+ /*    font-size: 20px;*/
+ /*    margin-bottom: 8px;*/
+ /*}*/
 
  .location {
      color: #666;

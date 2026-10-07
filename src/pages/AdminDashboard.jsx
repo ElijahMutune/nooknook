@@ -175,16 +175,9 @@ const AdminDashboard = () => {
                         ) :
                             activeMenu === "Images" ? (
                                 <AdminImages />
-                            ) :
-                                activeMenu === "Users" ? (
-                                    <div style={{
-                                        padding: "40px",
-                                        fontSize: "30px",
-                                        fontWeight: "bold"
-                                    }}>
-                                        USERS BUTTON IS WORKING
-                                    </div>
-                                ) : (
+                            ) : activeMenu === "Users" ? (
+                                <AdminUsers />
+                            ) : (
 
                                     <>
 

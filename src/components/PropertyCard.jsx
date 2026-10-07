@@ -22,12 +22,20 @@ function PropertyCard({ property }) {
                     "";
             }
 
-            // Convert backend relative URL to full URL
-            if (imageUrl.startsWith("/")) {
-                return `http://localhost:5000${imageUrl}`;
+            if (!imageUrl) {
+                return "";
             }
 
-            return imageUrl;
+            // Already a complete URL
+            if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {
+                return imageUrl;
+            }
+
+            // Backend returns relative paths such as:
+            // /uploads/properties/image.jpg
+            const backendUrl = process.env.REACT_APP_API_URL.replace("/api", "");
+
+            return `${backendUrl}${imageUrl}`;
         })
         .filter(Boolean);
     console.log("PROPERTY:", property);
