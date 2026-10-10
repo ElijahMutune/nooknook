@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./AdminDashboard.css";
 import AdminPlaces from "./AdminPlaces";
 import AdminCategories from "./AdminCategories";
@@ -6,10 +7,48 @@ import AdminPlaceCategories from "./AdminPlaceCategories";
 import AdminVacants from "./AdminVacants";
 import AdminImages from "./AdminImages";
 import AdminUsers from "./AdminUsers";
+import AdminAmenities from "./AdminAmenities";
 
 const AdminDashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [activeMenu, setActiveMenu] = useState("Dashboard");
+
+
+    const navigate = useNavigate();
+
+    const [loggedInUser] = useState(() => {
+        try {
+            return JSON.parse(localStorage.getItem("user") || "null");
+        } catch {
+            return null;
+        }
+    });
+
+    const userName =
+        loggedInUser?.name ||
+        loggedInUser?.full_name ||
+        loggedInUser?.username ||
+        loggedInUser?.email ||
+        "Administrator";
+
+    const userRole =
+        loggedInUser?.role === "admin"
+            ? "Administrator"
+            : loggedInUser?.role || "User";
+
+    const userInitial = userName.charAt(0).toUpperCase();
+
+    const handleLogout = () => {
+        const confirmed = window.confirm("Are you sure you want to log out?");
+
+        if (!confirmed) return;
+
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+
+        navigate("/", { replace: true });
+    };
+
 
     const menuItems = [
         { name: "Dashboard", icon: "📊" },
@@ -45,13 +84,13 @@ const AdminDashboard = () => {
                 }`}
             >
 
-                <div className="admin-logo">
-                    <div className="admin-logo-icon">N</div>
+                <div className="admin-user-avatar">
+                    {userInitial}
+                </div>
 
-                    <div>
-                        <h2>NookNook</h2>
-                        <span>ADMIN PANEL</span>
-                    </div>
+                <div className="admin-user-info">
+                    <strong>{userName}</strong>
+                    <span>{userRole}</span>
                 </div>
 
                 <nav className="admin-navigation">
@@ -79,8 +118,10 @@ const AdminDashboard = () => {
                     </p>
 
                     <button
-                        className="admin-menu-item"
-                        onClick={() => alert("Settings coming next")}
+                        className={`admin-menu-item ${
+                            activeMenu === "Settings" ? "active" : ""
+                        }`}
+                        onClick={() => handleMenuClick("Settings")}
                     >
                         <span className="menu-icon">⚙️</span>
                         <span>Settings</span>
@@ -88,11 +129,7 @@ const AdminDashboard = () => {
 
                     <button
                         className="admin-menu-item logout-item"
-                        onClick={() =>
-                            alert(
-                                "Logout will be connected to authentication"
-                            )
-                        }
+                        onClick={handleLogout}
                     >
                         <span className="menu-icon">🚪</span>
                         <span>Logout</span>
@@ -100,17 +137,13 @@ const AdminDashboard = () => {
 
                 </nav>
 
-                <div className="admin-sidebar-footer">
+                <div className="admin-user-avatar">
+                    {userInitial}
+                </div>
 
-                    <div className="admin-user-avatar">
-                        A
-                    </div>
-
-                    <div className="admin-user-info">
-                        <strong>Administrator</strong>
-                        <span>System Admin</span>
-                    </div>
-
+                <div className="admin-user-info">
+                    <strong>{userName}</strong>
+                    <span>{userRole}</span>
                 </div>
 
             </aside>
@@ -121,7 +154,7 @@ const AdminDashboard = () => {
                 {/* TOP BAR */}
                 <header className="admin-topbar">
 
-                    <button
+                <button
                         className="mobile-menu-button"
                         onClick={() => setSidebarOpen(true)}
                     >
@@ -144,16 +177,14 @@ const AdminDashboard = () => {
                         </button>
 
                         <div className="topbar-admin">
-
                             <div className="topbar-avatar">
-                                A
+                                {userInitial}
                             </div>
 
                             <div>
-                                <strong>Admin</strong>
-                                <span>Administrator</span>
+                                <strong>{userName}</strong>
+                                <span>{userRole}</span>
                             </div>
-
                         </div>
 
                     </div>
@@ -170,6 +201,9 @@ const AdminDashboard = () => {
                     ) : activeMenu === "Place Categories" ? (
                         <AdminPlaceCategories />
                     ) :
+                        activeMenu === "Amenities" ? (
+                                <AdminAmenities />
+                    ) :
                         activeMenu === "Vacants" ? (
                             <AdminVacants />
                         ) :
@@ -177,7 +211,34 @@ const AdminDashboard = () => {
                                 <AdminImages />
                             ) : activeMenu === "Users" ? (
                                 <AdminUsers />
-                            ) : (
+                            ) : activeMenu === "Settings" ? (
+                                    <div className="admin-settings">
+                                        <span className="welcome-label">SYSTEM CONFIGURATION</span>
+                                        <h2>Settings</h2>
+                                        <p>Manage your NookNook site information and admin account.</p>
+
+                                        <div className="admin-stat-card">
+                                            <div className="stat-information">
+                                                <span>Site Name</span>
+                                                <strong>NookNook</strong>
+                                                <small>Property listing platform</small>
+                                            </div>
+                                        </div>
+
+                                        <div className="admin-stat-card">
+                                            <div className="stat-information">
+                                                <span>Logged-in Account</span>
+                                                <strong>{userName}</strong>
+                                                <small>{loggedInUser?.email || "Email not provided"}</small>
+                                                <small>Role: {userRole}</small>
+                                            </div>
+                                        </div>
+
+                                        <p>
+                                            Site-wide settings are not connected to database storage yet.
+                                        </p>
+                                    </div>
+                                ) : (
 
                                     <>
 
@@ -207,98 +268,6 @@ const AdminDashboard = () => {
 
                             </div>
 
-                            {/* STATISTICS */}
-                            <div className="admin-stat-grid">
-
-                                <div className="admin-stat-card">
-
-                                    <div className="stat-icon">
-                                        🏠
-                                    </div>
-
-                                    <div className="stat-information">
-
-                                        <span>
-                                            Total Properties
-                                        </span>
-
-                                        <strong>1</strong>
-
-                                        <small>
-                                            Properties listed
-                                        </small>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="admin-stat-card">
-
-                                    <div className="stat-icon">
-                                        📍
-                                    </div>
-
-                                    <div className="stat-information">
-
-                                        <span>
-                                            Places
-                                        </span>
-
-                                        <strong>3</strong>
-
-                                        <small>
-                                            Active locations
-                                        </small>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="admin-stat-card">
-
-                                    <div className="stat-icon">
-                                        👥
-                                    </div>
-
-                                    <div className="stat-information">
-
-                                        <span>
-                                            Users
-                                        </span>
-
-                                        <strong>2</strong>
-
-                                        <small>
-                                            Registered users
-                                        </small>
-
-                                    </div>
-
-                                </div>
-
-                                <div className="admin-stat-card">
-
-                                    <div className="stat-icon">
-                                        ⭐
-                                    </div>
-
-                                    <div className="stat-information">
-
-                                        <span>
-                                            Premium Users
-                                        </span>
-
-                                        <strong>1</strong>
-
-                                        <small>
-                                            Active premium users
-                                        </small>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
 
                             {/* QUICK ACTIONS */}
                             <div className="admin-section-header">
@@ -351,7 +320,7 @@ const AdminDashboard = () => {
 
                                 <button
                                     onClick={() =>
-                                        handleMenuClick("Properties")
+                                        handleMenuClick("Vacants")
                                     }
                                     className="quick-action-card"
                                 >
@@ -385,92 +354,92 @@ const AdminDashboard = () => {
 
                             </div>
 
-                            {/* RECENT ACTIVITY */}
-                            <div className="admin-section-header activity-heading">
+                            {/*/!* RECENT ACTIVITY *!/*/}
+                            {/*<div className="admin-section-header activity-heading">*/}
 
-                                <div>
+                            {/*    <div>*/}
 
-                                    <h2>
-                                        Recent Activity
-                                    </h2>
+                            {/*        <h2>*/}
+                            {/*            Recent Activity*/}
+                            {/*        </h2>*/}
 
-                                    <p>
-                                        Latest changes on your platform
-                                    </p>
+                            {/*        <p>*/}
+                            {/*            Latest changes on your platform*/}
+                            {/*        </p>*/}
 
-                                </div>
+                            {/*    </div>*/}
 
-                            </div>
+                            {/*</div>*/}
 
-                            <div className="activity-card">
+                            {/*<div className="activity-card">*/}
 
-                                <div className="activity-item">
+                            {/*    <div className="activity-item">*/}
 
-                                    <div className="activity-icon">
-                                        🏠
-                                    </div>
+                            {/*        <div className="activity-icon">*/}
+                            {/*            🏠*/}
+                            {/*        </div>*/}
 
-                                    <div>
-                                        <strong>
-                                            Property added
-                                        </strong>
+                            {/*        <div>*/}
+                            {/*            <strong>*/}
+                            {/*                Property added*/}
+                            {/*            </strong>*/}
 
-                                        <p>
-                                            Modern Single Room - Kilifi
-                                        </p>
-                                    </div>
+                            {/*            <p>*/}
+                            {/*                Modern Single Room - Kilifi*/}
+                            {/*            </p>*/}
+                            {/*        </div>*/}
 
-                                    <span>
-                                        Recently
-                                    </span>
+                            {/*        <span>*/}
+                            {/*            Recently*/}
+                            {/*        </span>*/}
 
-                                </div>
+                            {/*    </div>*/}
 
-                                <div className="activity-item">
+                            {/*    <div className="activity-item">*/}
 
-                                    <div className="activity-icon">
-                                        ⭐
-                                    </div>
+                            {/*        <div className="activity-icon">*/}
+                            {/*            ⭐*/}
+                            {/*        </div>*/}
 
-                                    <div>
-                                        <strong>
-                                            Premium user updated
-                                        </strong>
+                            {/*        <div>*/}
+                            {/*            <strong>*/}
+                            {/*                Premium user updated*/}
+                            {/*            </strong>*/}
 
-                                        <p>
-                                            Test User was given premium access
-                                        </p>
-                                    </div>
+                            {/*            <p>*/}
+                            {/*                Test User was given premium access*/}
+                            {/*            </p>*/}
+                            {/*        </div>*/}
 
-                                    <span>
-                                        Recently
-                                    </span>
+                            {/*        <span>*/}
+                            {/*            Recently*/}
+                            {/*        </span>*/}
 
-                                </div>
+                            {/*    </div>*/}
 
-                                <div className="activity-item">
+                            {/*    <div className="activity-item">*/}
 
-                                    <div className="activity-icon">
-                                        ✨
-                                    </div>
+                            {/*        <div className="activity-icon">*/}
+                            {/*            ✨*/}
+                            {/*        </div>*/}
 
-                                    <div>
-                                        <strong>
-                                            Amenities updated
-                                        </strong>
+                            {/*        <div>*/}
+                            {/*            <strong>*/}
+                            {/*                Amenities updated*/}
+                            {/*            </strong>*/}
 
-                                        <p>
-                                            Six property amenities are available
-                                        </p>
-                                    </div>
+                            {/*            <p>*/}
+                            {/*                Six property amenities are available*/}
+                            {/*            </p>*/}
+                            {/*        </div>*/}
 
-                                    <span>
-                                        Recently
-                                    </span>
+                            {/*        <span>*/}
+                            {/*            Recently*/}
+                            {/*        </span>*/}
 
-                                </div>
+                            {/*    </div>*/}
 
-                            </div>
+                            {/*</div>*/}
 
                         </>
 

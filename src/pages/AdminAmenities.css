@@ -1,0 +1,243 @@
+.admin-amenities {
+    width: 100%;
+    color: #1f2937;
+}
+
+.admin-amenities-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 26px;
+}
+
+.admin-amenities-header h2 {
+    margin: 0 0 8px;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.admin-amenities-header p {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+.amenities-count {
+    min-width: 145px;
+    padding: 16px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.amenities-count span,
+.amenities-count strong {
+    display: block;
+}
+
+.amenities-count span {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.amenities-count strong {
+    margin-top: 5px;
+    font-size: 27px;
+}
+
+.amenity-add-form,
+.amenities-table-card {
+    padding: 22px;
+    margin-bottom: 24px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+}
+
+.amenity-add-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.amenity-add-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.amenity-add-controls input,
+.amenity-edit-input {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font: inherit;
+    outline: none;
+}
+
+.amenity-add-controls input:focus,
+.amenity-edit-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.amenity-add-controls button,
+.amenity-refresh-button,
+.amenity-actions button {
+    border: 0;
+    border-radius: 7px;
+    padding: 10px 14px;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.amenity-add-controls button {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+.amenity-add-controls button:hover {
+    background: #1d4ed8;
+}
+
+.amenity-add-controls button:disabled,
+.amenity-refresh-button:disabled,
+.amenity-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.amenity-message {
+    padding: 13px 16px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.amenity-error {
+    color: #991b1b;
+    background: #fee2e2;
+}
+
+.amenity-success {
+    color: #166534;
+    background: #dcfce7;
+}
+
+.amenities-table-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.amenities-table-heading h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.amenity-refresh-button {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.amenities-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.amenities-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.amenities-table th,
+.amenities-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.amenities-table th {
+    color: #6b7280;
+    background: #f9fafb;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.amenities-table td {
+    font-size: 14px;
+}
+
+.amenity-name {
+    font-weight: 600;
+}
+
+.amenity-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+}
+
+.amenity-edit-button {
+    color: #1d4ed8;
+    background: #dbeafe;
+}
+
+.amenity-save-button {
+    color: #166534;
+    background: #dcfce7;
+}
+
+.amenity-cancel-button {
+    color: #374151;
+    background: #f3f4f6;
+}
+
+.amenity-delete-button {
+    color: #b91c1c;
+    background: #fee2e2;
+}
+
+.amenities-empty {
+    padding: 28px 12px;
+    color: #6b7280;
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+    .admin-amenities-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .amenities-count {
+        width: fit-content;
+    }
+
+    .amenity-add-form,
+    .amenities-table-card {
+        padding: 16px;
+    }
+
+    .amenity-add-controls {
+        flex-direction: column;
+    }
+
+    .amenity-add-controls button {
+        width: 100%;
+    }
+
+    .amenities-table th,
+    .amenities-table td {
+        padding: 12px 9px;
+    }
+}
